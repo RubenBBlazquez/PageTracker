@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Game Finder",
+  "description": "mira precios en amazon de un producto concreto.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "logo.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "initPageTracker.js"
+      ]
+    }
+  ]
+}
