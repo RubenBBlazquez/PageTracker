@@ -21,14 +21,35 @@ export class AmazonTracker extends BasePageTracker {
         return new Promise(async (resolve, reject) => {
             await new Promise(resolve => setTimeout(resolve, 2500));
 
-            const productsPrices = Array.from(document.getElementsByClassName('a-price'))
+            const products = Array.from(document.getElementsByClassName('a-price'))
                 .filter((priceElement) => {
                     return !(priceElement.dataset && priceElement.dataset.aStrike);
+                })
+                .flatMap((element)=>{
+                    if (element.childNodes.length === 0 || !element.parentElement){
+                        return [];
+                    }
+
+                    const price = element.childNodes[0].textContent.replace('€','').trim();
+                    const link =  element.parentElement.href;
+
+                    let title = "";
+
+                    if (link) {
+                        title = decodeURIComponent(link.split('/')[3].replaceAll('-', ' '));
+                    }
+                    if (!this._checkIfCanInsertInCache(title, true)){
+                        return [];
+                    }
+
+                    if (!this._checkIfProductMatchWithDesireKeys(title)){
+                        return []
+                    }
+
+                    return {price, title, href: link};
                 });
 
-            console.log(productsPrices)
-
-            return resolve([])
+            return resolve(products)
         })
     }
 
@@ -42,7 +63,7 @@ export class AmazonTracker extends BasePageTracker {
             this.extractPrices().then(async (prices) => {
 
                 for (const price of prices) {
-                    if (this._checkValidPrice(price)) {
+                    if (this._checkValidPrice(price.price)) {
                         this.notifyTelegram(price).then(() => {
                             console.log('Notification sent successfully')
                         });
@@ -71,7 +92,7 @@ export class AmazonTracker extends BasePageTracker {
 
                 setTimeout(() => {
                     location.href = url
-                }, this.baseInformation.timeToReload/4)
+                }, this.baseInformation.timeToReload/5)
             });
         }
     }

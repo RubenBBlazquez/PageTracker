@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Game Finder",
-  "description": "mira precios en amazon de un producto concreto.",
+  "description": "Chrome extension to track price information about desired games in pages such as amazon, vinted or wallapop.",
   "version": "1.0",
   "browser_action": {
     "default_icon": "logo.png"

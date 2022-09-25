@@ -24,7 +24,7 @@ export class WallapopTracker extends BasePageTracker {
             await new Promise(resolve => setTimeout(resolve, 2500));
 
             const divProductsImages = Array.from(document.getElementsByClassName('ItemCard__image'));
-            const divPricesProducts  = Array.from(document.getElementsByClassName('ItemCard__price'));
+            const divPricesProducts = Array.from(document.getElementsByClassName('ItemCard__price'));
 
             const imageProducts = divProductsImages.map((element) => {
                 return element.childNodes[0]
@@ -35,24 +35,24 @@ export class WallapopTracker extends BasePageTracker {
                 const price = divPricesProducts[index].textContent.trim();
                 let productCode = element.src.match('(p[0-9a-zA-z]+\\/)');
 
-                if (productCode.length === 0){
+                if (productCode.length === 0) {
                     return [];
                 }
 
-                productCode = productCode[0].replace('p','').replace('/', '');
+                productCode = productCode[0].replace('p', '').replace('/', '');
 
-                const href = 'https://es.wallapop.com/item/' + (title + ' ' + productCode).replaceAll(' ','-')
+                const href = 'https://es.wallapop.com/item/' + (title + ' ' + productCode).replaceAll(' ', '-')
 
                 console.log(href)
-                if (!this._checkIfCanInsertInCache(href, true)){
+                if (!this._checkIfCanInsertInCache(href, true)) {
                     return [];
                 }
 
-                if (!this._checkIfProductMatchWithDesireKeys(title)){
+                if (!this._checkIfProductMatchWithDesireKeys(title)) {
                     return [];
                 }
 
-                return {'title': title, 'price': price, 'href': href}
+                return {title, price, 'href': href}
             })
 
             return resolve(productInformation)
@@ -79,7 +79,8 @@ export class WallapopTracker extends BasePageTracker {
                     if (this._checkValidPrice(price.price)) {
                         this.notifyTelegram(price).then(() => {
                             console.log('notification sent successfully')
-                        });                    }
+                        });
+                    }
                 }
 
                 setTimeout(() => {

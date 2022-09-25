@@ -89,6 +89,7 @@ export class BasePageTracker extends IPageTracker {
      * @protected
      * */
     _checkIfProductMatchWithDesireKeys = (productTitle) => {
+        console.log(productTitle)
         for (const key of this.baseInformation.wantedProductsKeys) {
             if (productTitle.toLowerCase().includes(key)){
                 return true;

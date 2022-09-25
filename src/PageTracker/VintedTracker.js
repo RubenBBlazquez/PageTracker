@@ -42,7 +42,7 @@ export class VintedTracker extends BasePageTracker {
                 price = price[2]
             }
 
-            return {'price': price, 'title': title, 'href': element.href};
+            return {price, title, 'href': element.href};
         });
     }
 
