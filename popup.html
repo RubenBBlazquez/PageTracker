@@ -1,0 +1,40 @@
+<div style="width: 600px">
+    <div style="display: flex; justify-content: center; margin-bottom: 1em">
+        <h1>Basic Information:</h1>
+    </div>
+    <form action="" id="basicInformationForm">
+        <div style="width: 100%; display: flex;margin-top: 1em">
+            <h4 style="width: 25%; margin-right: 1.1em">Desired Product Keys</h4>
+            <textarea style="width: 75%" name="desiredKeys" placeholder="Desired Product Keys to filter , must be separated by commas"></textarea>
+        </div>
+        <div style="width: 100%; display: flex;margin-top: 1em">
+            <h4 style="width: 25%;margin-right: 1.1em">Telegram Bot Id</h4>
+            <input style="width: 75%" name="telegramBotId" placeholder="Telegram Bot Id"/>
+        </div>
+        <div style="width: 100%; display: flex;margin-top: 1em">
+            <h4 style="width: 25%;margin-right: 1.1em">Telegram Bot Id</h4>
+            <input style="width: 75%" name="telegramChatId" placeholder="Telegram Chat Id"/>
+        </div>
+        <div style="width: 100%; display: flex;margin-top: 1em">
+            <h4 style="width: 25%;margin-right: 1.1em">Desired Price</h4>
+            <input style="width: 75%" name="desiredPrice" placeholder="Desired Price"/>
+        </div>
+        <div style="width: 100%; display: flex;margin-top: 1em">
+            <h4 style="width: 25%;margin-right: 1.1em">Time To Reload</h4>
+            <input style="width: 75%" name="timeToReload" placeholder="Time To Reload"/>
+        </div>
+        <div style="display: flex; justify-content: center; margin-top: 2em">
+            <button style="width: 50%" id="saveInfo">Save Basic Information</button>
+        </div>
+    </form>
+
+</div>
+
+<script type="application/javascript">
+
+    document.getElementById('basicInformationForm').addEventListener('submit', () => {
+        event.preventDefault();
+        console.log(event.target)
+    })
+
+</script>
