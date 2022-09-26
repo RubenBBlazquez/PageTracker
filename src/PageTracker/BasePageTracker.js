@@ -99,8 +99,35 @@ export class BasePageTracker extends IPageTracker {
         return false;
     }
 
+    extractPrices(){}
 
-    searchPrices() {}
+    searchPrices() {
+        if (this._isTheWebIWantToGetInformation()) {
+            this.extractPrices().then((prices) => {
+                console.log(prices)
 
+                if (!prices || prices.length === 0) {
+                    setTimeout(() => {
+                        document.location.reload();
 
+                    }, this.baseInformation.timeToReload);
+                    return;
+                }
+
+                for (const price of prices) {
+                    console.log(price)
+                    if (this._checkValidPrice(price.price)) {
+                        this.notifyTelegram(price).then(() => {
+                            console.log('notification sent successfully')
+                        });
+                    }
+                }
+
+                setTimeout(() => {
+                    document.location.reload();
+
+                }, this.baseInformation.timeToReload + 2500);
+            });
+        }
+    }
 }
