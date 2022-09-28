@@ -17,6 +17,8 @@
     "rollup-plugin-chrome-extension": "^3.6.10"
   },
   "dependencies": {
+    "@extend-chrome/storage": "^1.5.0",
+    "chrome-promise": "^3.0.5",
     "sessionstorage": "^0.1.0"
   }
 }

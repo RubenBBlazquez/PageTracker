@@ -4,7 +4,9 @@
   "description": "Chrome extension to track price information about desired games in pages such as amazon, vinted or wallapop.",
   "version": "1.0",
   "browser_action": {
-    "default_icon": "logo.png"
+    "default_icon": "logo.png",
+    "default_popup": "src/Design/popup.html",
+    "default_title": "Game Finder "
   },
   "permissions": [
     "tabs",
@@ -18,7 +20,7 @@
         "<all_urls>"
       ],
       "js": [
-        "initPageTracker.js"
+        "src/initPageTracker.js"
       ]
     }
   ]

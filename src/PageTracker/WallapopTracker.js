@@ -33,17 +33,16 @@ export class WallapopTracker extends BasePageTracker {
             const productInformation = imageProducts.flatMap((element, index) => {
                 const title = element.alt;
                 const price = divPricesProducts[index].textContent.trim();
-                let productCode = element.src.match('(p[0-9a-zA-z]+\\/)');
+                let productCode = element.src.match('(\\/[0-9a-zA-Z]+)p([0-9]+)\\/');
 
                 if (productCode.length === 0) {
                     return [];
                 }
 
-                productCode = productCode[0].replace('p', '').replace('/', '');
+                productCode = productCode[2].replace('p', '').replace('/', '');
 
                 const href = 'https://es.wallapop.com/item/' + (title + ' ' + productCode).replaceAll(' ', '-')
 
-                console.log(href)
                 if (!this._checkIfCanInsertInCache(href, true)) {
                     return [];
                 }

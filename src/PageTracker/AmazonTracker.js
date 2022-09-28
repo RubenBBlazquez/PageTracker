@@ -55,7 +55,7 @@ export class AmazonTracker extends BasePageTracker {
 
 
     searchPrices() {
-        if (this._isTheWebIWantToGetInformation()) {
+        if (this._isTheWebIWantToGetInformation() && this._isUrlToTrackActivated()) {
 
             let maxPage = document.getElementsByClassName('s-pagination-button').length;
             let actualPage = 1;

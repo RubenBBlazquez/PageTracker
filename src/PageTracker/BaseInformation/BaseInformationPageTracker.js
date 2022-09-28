@@ -1,10 +1,11 @@
 export class BaseInformationPageTracker{
-    constructor(wantedProductsKeys, telegramChatId, telegramBotId, desiredPrice, timeToReload) {
+    constructor(wantedProductsKeys, telegramChatId, telegramBotId, desiredPrice, timeToReload, activatedPages) {
         this._wantedProductsKeys = wantedProductsKeys;
         this._telegramChatId = telegramChatId;
         this._telegramBotId = telegramBotId;
         this._desiredPrice = desiredPrice;
         this._timeToReload = timeToReload;
+        this._activatedPages = activatedPages;
     }
 
 
@@ -51,5 +52,13 @@ export class BaseInformationPageTracker{
     set timeToReload(value) {
         this._timeToReload = value;
         return this;
+    }
+
+    get activatedPages() {
+        return this._activatedPages;
+    }
+
+    set activatedPages(value) {
+        this._activatedPages = value;
     }
 }

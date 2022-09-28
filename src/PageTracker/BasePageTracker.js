@@ -14,8 +14,14 @@ export class BasePageTracker extends IPageTracker {
         this.userLanguage = window.navigator.userLanguage || window.navigator.language;
         this.userLanguage = this.userLanguage.split('-')[0]
         this.cacheManager = cacheManager;
+        this.pageUrl = "";
     }
 
+    _isUrlToTrackActivated(){
+        const activatedUrls = Object.keys(this.baseInformation.activatedPages);
+
+        return activatedUrls.includes(this.pageUrl) && this.baseInformation.activatedPages[this.pageUrl]
+    }
 
     /**
      * Method to know if we are searching in the correct page
@@ -55,6 +61,7 @@ export class BasePageTracker extends IPageTracker {
      * @returns
      */
     _checkValidPrice(price) {
+        console.log(1111, price)
         let clearPrice = price.replace("€", "").replace(",", ".").replace(" ","");
         console.log("Price found:" + clearPrice);
         return Number(clearPrice) <= this.baseInformation.desiredPrice;
@@ -102,10 +109,9 @@ export class BasePageTracker extends IPageTracker {
     extractPrices(){}
 
     searchPrices() {
-        if (this._isTheWebIWantToGetInformation()) {
+        if (this._isTheWebIWantToGetInformation() && this._isUrlToTrackActivated()) {
+            console.log(1);
             this.extractPrices().then((prices) => {
-                console.log(prices)
-
                 if (!prices || prices.length === 0) {
                     setTimeout(() => {
                         document.location.reload();
@@ -115,7 +121,7 @@ export class BasePageTracker extends IPageTracker {
                 }
 
                 for (const price of prices) {
-                    console.log(price)
+                    console.log(222, price)
                     if (this._checkValidPrice(price.price)) {
                         this.notifyTelegram(price).then(() => {
                             console.log('notification sent successfully')
@@ -126,7 +132,7 @@ export class BasePageTracker extends IPageTracker {
                 setTimeout(() => {
                     document.location.reload();
 
-                }, this.baseInformation.timeToReload + 2500);
+                }, this.baseInformation.timeToReload);
             });
         }
     }

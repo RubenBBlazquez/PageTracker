@@ -1,5 +1,5 @@
-import {PageTrackerFactory} from "./src/PageTracker/Factory/PageTrackerFactory";
-import {BaseInformationPageTracker} from "./src/PageTracker/BaseInformation/BaseInformationPageTracker";
+import {PageTrackerFactory} from "./PageTracker/Factory/PageTrackerFactory";
+import {BaseInformationPageTracker} from "./PageTracker/BaseInformation/BaseInformationPageTracker";
 import {storage} from "@extend-chrome/storage";
 
 const DEFAULT_DESIRED_PRODUCT_KEYS = [
@@ -16,7 +16,7 @@ const DEFAULT_TIME_TO_RELOAD = 10000;
 const factory = new PageTrackerFactory();
 
 storage.sync.getKeys().then((keys) => {
-    if (keys.length === 0){
+    if (keys.length === 0) {
         return;
     }
 
@@ -29,8 +29,8 @@ storage.sync.getKeys().then((keys) => {
             basicInformation.telegramBotId ?? DEFAULT_TELEGRAM_BOT_ID,
             basicInformation.desiredPrice ?? DEFAULT_DESIRED_PRICE,
             basicInformation.timeToReload ?? DEFAULT_TIME_TO_RELOAD,
-            basicInformation.activePages ?? DEFAULT_TIME_TO_RELOAD,
-            )
+            basicInformation.activatedPages,
+        )
 
         const userUrl = document.location.href;
 
