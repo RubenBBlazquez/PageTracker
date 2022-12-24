@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "@extend-chrome/storage": "^1.5.0",
+    "@popperjs/core": "^2.11.6",
     "chrome-promise": "^3.0.5",
-    "sessionstorage": "^0.1.0"
+    "rollup-plugin-font": "^1.1.2",
+    "sessionstorage": "^0.0.2"
   }
 }

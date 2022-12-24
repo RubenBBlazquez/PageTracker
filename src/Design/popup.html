@@ -1,6 +1,5 @@
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
     <style>
         .form-control {
             width: 70% !important;
@@ -14,7 +13,7 @@
 <body>
 <div class="bg-light container rounded mt-2" style="width: 600px">
     <div style="display: flex; justify-content: center; margin-bottom: 1em">
-        <h4 class="bg-dark rounded text-light p-3 mt-1 align-text-bottom">Basic Information:</h4>
+        <h4 class="bg-dark rounded text-light p-3 mt-1 align-text-bottom">Tracker Basic Information</h4>
     </div>
 
     <div class="col-12 mt-2 d-flex align-items-end justify-content-around">
@@ -39,30 +38,150 @@
         <input class="col-8 form-control" id="timeToReload" placeholder="Time To Reload"/>
     </div>
     <div class="col-12 row">
-        <div class="col-12 mt-2 d-flex align-items-center">
+        <div class="col-12 mt-2 row d-flex align-items-center">
+            <h6 class="col-4">Activated Pages</h6>
+            <div class="row col-8">
+                <div class="row col-12">
+                    <div class="form-check form-switch col-4 mt-1">
+                        <input class="form-check-input" type="checkbox" id="amazon">
+                        <label class="form-check-label  " for="amazon">Amazon</label>
+                    </div>
+                    <div class="col-2">
+                        <button id="editClassInformationAmazonButton" class="btn btn-light" data-bs-toggle="modal"
+                                data-bs-target="#editClassInformationAmazon">
+                            <img src="images/edit.png"
+                                 title="edit classes information to get prices and products">
+                        </button>
+                    </div>
+                </div>
+                <div class="modal fade" id="editClassInformationAmazon" data-bs-backdrop="static"
+                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editClassInformationAmazonLabel">Class Information
+                                    Amazon</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6 class="form-label col-12"
+                                       style="width: 100% !important;">Class
+                                    of the product price
+                                    container in Amazon</h6>
+                                <input type="text" class="mt-1 form-control col-12" style="width: 100% !important;"
+                                       id="productPriceClassAmazon"
+                                       placeholder="class of the product price container in amazon">
+                                <button data-bs-dismiss="modal" id="saveInformationAmazon" class="btn btn-dark text-light mt-2 col-12">Save
+                                    Information
+                                </button>
+                                <button data-bs-dismiss="modal" id="closeCollapseAmazon" class="btn btn-danger text-light mt-2 col-12">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-12 mt-1">
+                    <div class="form-check form-switch col-4 mt-1">
+                        <input class="form-check-input " type="checkbox" id="vinted">
+                        <label class="form-check-label" for="vinted">Vinted</label>
+                    </div>
+                    <div class="col-2">
+                        <button id="editClassInformationVintedButton" class="btn btn-light" data-bs-toggle="modal"
+                                data-bs-target="#editClassInformationVinted"><img src="images/edit.png"
+                                                                                  title="edit classes information to get prices and products">
+                        </button>
+                    </div>
+                </div>
+                <div class="modal fade" id="editClassInformationVinted" data-bs-backdrop="static"
+                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editClassInformationVintedLabel">Class Information
+                                    Vinted</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6 class="form-label col-12" style="width: 100% !important;">Class
+                                    of the product link container in Vinted</h6>
+                                <input type="text" class="mt-1 form-control col-12 mb-3" style="width: 100% !important;"
+                                       id="productLinkClassVinted"
+                                       placeholder="class of the product link container in vinted">
 
-            <h6 class="me-4">Activated Pages</h6>
-            <div class="">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="amazon">
-                    <label class="form-check-label" for="amazon">Amazon</label>
+                                <h6 class="form-label col-12" style="width: 100% !important;">Class
+                                    of the product owner link container in Vinted</h6>
+                                <input type="text" class="mt-1 form-control col-12" style="width: 100% !important;"
+                                       id="productOwnerLinkClassVinted"
+                                       placeholder="Class of the product owner link container in Vinted">
+                                <button data-bs-dismiss="modal" id="saveInformationVinted" class="btn btn-dark text-light mt-2 col-12">Save
+                                    Information
+                                </button>
+                                <button data-bs-dismiss="modal" id="closeCollapseVinted" class="btn btn-danger text-light mt-2 col-12">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="vinted">
-                    <label class="form-check-label" for="vinted">Vinted</label>
+                <div class="row col-12 mt-1">
+                    <div class="form-check form-switch col-4 mt-1">
+                        <input class="form-check-input" type="checkbox" id="wallapop">
+                        <label class="form-check-label" for="wallapop">Wallapop</label>
+                    </div>
+                    <div class="col-2">
+                        <button id="editClassInformationWallapopButton" class="btn btn-light"
+                                data-bs-toggle="modal" data-bs-target="#editClassInformationWallapop"><img
+                                src="images/edit.png"
+                                title="edit classes information to get prices and products">
+                        </button>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="wallapop">
-                    <label class="form-check-label" for="wallapop">Wallapop</label>
+                <div class="modal fade" id="editClassInformationWallapop" data-bs-backdrop="static"
+                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editClassInformationWallapopLabel">Class Information
+                                    Wallapop</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6 class="form-label col-12"
+                                    style="width: 100% !important;">Class of the product price
+                                    container in Wallapop</h6>
+                                <input type="text" class="mt-1 form-control col-12 mb-3" style="width: 100% !important;"
+                                       id="productPriceClassWallapop"
+                                       placeholder="class of the product price container in Wallapop">
+
+                                <h6 class="form-label col-12 mt-2"
+                                    style="width: 100% !important;">Class of the product image
+                                    container in Wallapop</h6>
+                                <input type="text" class="mt-1 form-control col-12" style="width: 100% !important;"
+                                       id="productImageClassWallapop"
+                                       placeholder="class of the product image container in Wallapop">
+                                <button id="saveInformationWallapop" class="btn btn-dark text-light mt-2 col-12"
+                                        data-bs-dismiss="modal">Save
+                                    Information
+                                </button>
+                                <button id="closeCollapseWallapop" class="btn btn-danger text-light mt-2 col-12"
+                                        data-bs-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center mb-3 mt-3">
-        <button class="btn btn-dark text-light col-8" id="saveInfo">Save Basic Information</button>
-    </div>
+</div>
+<div class="d-flex justify-content-center mb-1 mt-3">
+    <button class="btn btn-dark text-light col-8" id="saveInfo">Save Basic Information</button>
 </div>
 
-<script src="popup.js" type="application/javascript">
-</script>
+</div>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="application/javascript"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js" type="application/javascript"></script>
+<script src="popup.js" type="application/javascript"></script>
 </body>

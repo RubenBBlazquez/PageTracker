@@ -12,6 +12,7 @@ export class WallapopTracker extends BasePageTracker {
     constructor(baseInformation, cacheManager) {
         super(baseInformation, cacheManager);
         this.pageUrl = "wallapop"
+        this.wallapopInfo = baseInformation.pagesInformation.wallapopInfo
     }
 
     /**
@@ -23,19 +24,27 @@ export class WallapopTracker extends BasePageTracker {
         return new Promise(async (resolve, reject) => {
             await new Promise(resolve => setTimeout(resolve, 2500));
 
-            const divProductsImages = Array.from(document.getElementsByClassName('ItemCard__image'));
-            const divPricesProducts = Array.from(document.getElementsByClassName('ItemCard__price'));
+            const divProductsImages = Array.from(document.getElementsByClassName(this.wallapopInfo.productImageClass));
+            const divPricesProducts = Array.from(document.getElementsByClassName(this.wallapopInfo.productPriceClass));
 
             const imageProducts = divProductsImages.map((element) => {
-                return element.childNodes[0]
+                let image = element.childNodes[0]
+
+                if (!image.src){
+                    image = this.iterateTreeToFindProductImage(element.childNodes)
+                    image.alt = this.iterateReverseTreeToFindProductTitle(element)
+                }
+
+                return image
             })
 
             const productInformation = imageProducts.flatMap((element, index) => {
-                const title = element.alt;
+                const title = element.alt.replaceAll('"','').toLowerCase();
+                console.log(title)
                 const price = divPricesProducts[index].textContent.trim();
-                let productCode = element.src.match('(\\/[0-9a-zA-Z]+)p([0-9]+)\\/');
+                let productCode = element?.src?.match('(\\/[0-9a-zA-Z]+)p([0-9]+)\\/');
 
-                if (productCode.length === 0) {
+                if (!productCode || productCode.length === 0) {
                     return [];
                 }
 
@@ -56,5 +65,38 @@ export class WallapopTracker extends BasePageTracker {
 
             return resolve(productInformation)
         })
+    }
+
+    iterateTreeToFindProductImage(elements, paso = 0){
+        for (const element of elements) {
+            if (element.src !== '' && element instanceof HTMLImageElement){
+                return element
+            }
+
+            if (element.childNodes.length > 0){
+                const foundSolution = this.iterateTreeToFindProductImage(element.childNodes, paso+=1)
+
+                if (foundSolution){
+                    return foundSolution
+                }
+            }
+        }
+
+        return false
+    }
+
+    iterateReverseTreeToFindProductTitle(element, paso = 0){
+        while(true){
+            if (paso > 150){
+                return ''
+            }
+
+            if (element?.title){
+                return element.title
+            }
+
+            element = element.parentElement
+            paso+=1
+        }
     }
 }

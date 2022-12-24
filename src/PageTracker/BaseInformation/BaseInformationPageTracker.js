@@ -1,13 +1,21 @@
-export class BaseInformationPageTracker{
-    constructor(wantedProductsKeys, telegramChatId, telegramBotId, desiredPrice, timeToReload, activatedPages) {
+export class BaseInformationPageTracker {
+    constructor(wantedProductsKeys, telegramChatId, telegramBotId, desiredPrice, timeToReload, activatedPages, pagesInformation) {
         this._wantedProductsKeys = wantedProductsKeys;
         this._telegramChatId = telegramChatId;
         this._telegramBotId = telegramBotId;
         this._desiredPrice = desiredPrice;
         this._timeToReload = timeToReload;
         this._activatedPages = activatedPages;
+        this._pagesInformation = pagesInformation
     }
 
+    get pagesInformation() {
+        return this._pagesInformation;
+    }
+
+    set pagesInformation(value) {
+        this._pagesInformation = value;
+    }
 
     get wantedProductsKeys() {
         return this._wantedProductsKeys;

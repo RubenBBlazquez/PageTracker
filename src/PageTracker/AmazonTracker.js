@@ -10,6 +10,7 @@ export class AmazonTracker extends BasePageTracker {
     constructor(baseInformation, cacheManager) {
         super(baseInformation, cacheManager);
         this.pageUrl = "amazon"
+        this.amazonInfo = baseInformation.pagesInformation.amazonInfo
     }
 
     /**
@@ -21,7 +22,7 @@ export class AmazonTracker extends BasePageTracker {
         return new Promise(async (resolve, reject) => {
             await new Promise(resolve => setTimeout(resolve, 2500));
 
-            const products = Array.from(document.getElementsByClassName('a-price'))
+            const products = Array.from(document.getElementsByClassName(this.amazonInfo.productPriceClass))
                 .filter((priceElement) => {
                     return !(priceElement.dataset && priceElement.dataset.aStrike);
                 })

@@ -14,7 +14,6 @@ export class BasePageTracker extends IPageTracker {
         this.userLanguage = window.navigator.userLanguage || window.navigator.language;
         this.userLanguage = this.userLanguage.split('-')[0]
         this.cacheManager = cacheManager;
-        this.pageUrl = "";
     }
 
     _isUrlToTrackActivated(){
@@ -29,7 +28,7 @@ export class BasePageTracker extends IPageTracker {
      * @returns {boolean}
      */
     _isTheWebIWantToGetInformation() {
-        const actualDirection = document.location.href
+        const actualDirection = document.location.href.toLowerCase()
 
         return actualDirection.includes(this.pageUrl) === true;
     }
@@ -110,7 +109,6 @@ export class BasePageTracker extends IPageTracker {
 
     searchPrices() {
         if (this._isTheWebIWantToGetInformation() && this._isUrlToTrackActivated()) {
-            console.log(1);
             this.extractPrices().then((prices) => {
                 if (!prices || prices.length === 0) {
                     setTimeout(() => {
@@ -121,7 +119,6 @@ export class BasePageTracker extends IPageTracker {
                 }
 
                 for (const price of prices) {
-                    console.log(222, price)
                     if (this._checkValidPrice(price.price)) {
                         this.notifyTelegram(price).then(() => {
                             console.log('notification sent successfully')
@@ -131,7 +128,6 @@ export class BasePageTracker extends IPageTracker {
 
                 setTimeout(() => {
                     document.location.reload();
-
                 }, this.baseInformation.timeToReload);
             });
         }

@@ -13,7 +13,7 @@ export class VintedTracker extends BasePageTracker {
         super(baseInformation, cacheManager);
         this.pageUrl = "vinted"
         this.languageVariants = ['price', 'precio', 'prix', 'prezzo']
-        this.cacheManager = cacheManager;
+        this.vintedInfo = baseInformation.pagesInformation.vintedInfo
     }
 
     /**
@@ -23,8 +23,8 @@ export class VintedTracker extends BasePageTracker {
      */
     extractPrices() {
         return new Promise((resolve, reject) => {
-            const products = Array.from(document.getElementsByClassName('ItemBox_overlay__Hr4av'));
-            let profileUrls = Array.from(document.querySelectorAll('div.ItemBox_owner__wsoDc > a'));
+            const products = Array.from(document.getElementsByClassName(this.vintedInfo.productLinkClass));
+            let profileUrls = Array.from(document.querySelectorAll(`div.${this.vintedInfo.productOwnerLinkClass} > a`));
 
             profileUrls = profileUrls.map((anchor)=>{
                 return anchor.getAttribute('href')
