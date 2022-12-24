@@ -60,7 +60,6 @@ export class BasePageTracker extends IPageTracker {
      * @returns
      */
     _checkValidPrice(price) {
-        console.log(1111, price)
         let clearPrice = price.replace("€", "").replace(",", ".").replace(" ","");
         console.log("Price found:" + clearPrice);
         return Number(clearPrice) <= this.baseInformation.desiredPrice;
@@ -76,7 +75,6 @@ export class BasePageTracker extends IPageTracker {
      * @protected
      */
     _checkIfCanInsertInCache(key, value){
-        console.log(key, this.cacheManager.get(key), this.cacheManager.get(key) !== null)
         if (this.cacheManager.get(key) !== null){
             return false;
         }
@@ -95,7 +93,6 @@ export class BasePageTracker extends IPageTracker {
      * @protected
      * */
     _checkIfProductMatchWithDesireKeys = (productTitle) => {
-        console.log(productTitle)
         for (const key of this.baseInformation.wantedProductsKeys) {
             if (productTitle.toLowerCase().includes(key)){
                 return true;

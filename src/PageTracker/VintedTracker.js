@@ -42,7 +42,6 @@ export class VintedTracker extends BasePageTracker {
                 }
 
                 let price = title.match(`([${this.languageVariants.join('|')}]+:\\s)([€]?)([0-9]+\\.[0-9]+)([€]?)`);
-                console.log(price)
 
                 if (price && price.length > 1) {
                     price = price[3]

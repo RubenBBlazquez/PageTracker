@@ -40,7 +40,6 @@ export class WallapopTracker extends BasePageTracker {
 
             const productInformation = imageProducts.flatMap((element, index) => {
                 const title = element.alt.replaceAll('"','').toLowerCase();
-                console.log(title)
                 const price = divPricesProducts[index].textContent.trim();
                 let productCode = element?.src?.match('(\\/[0-9a-zA-Z]+)p([0-9]+)\\/');
 
